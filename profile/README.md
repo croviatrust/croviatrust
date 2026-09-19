@@ -10,6 +10,12 @@
   <a href="https://github.com/croviatrust/countersign/blob/main/CANON.md">Canon</a>
 </p>
 
+<p align="center">
+  <a href="https://croviatrust.com/registry/tacet/"><img alt="TACET epochs (live)" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fcroviatrust.com%2Fregistry%2Fdata%2Ftacet%2Fbadges%2Fepochs.json"></a>
+  <a href="https://croviatrust.com/registry/data/tacet/targets.json"><img alt="models observed (live)" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fcroviatrust.com%2Fregistry%2Fdata%2Ftacet%2Fbadges%2Fmodels.json"></a>
+  <a href="https://croviatrust.com/registry/data/tacet/latest.json"><img alt="signed observations of absence (live)" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fcroviatrust.com%2Fregistry%2Fdata%2Ftacet%2Fbadges%2Fnegative.json"></a>
+</p>
+
 Every hour, a public randomness beacon opens an epoch. **TACET** fetches the model
 cards of the AI systems under watch, runs a published predicate over the bytes —
 *does this card name its training data?* — signs each answer, commits them all to a
@@ -17,6 +23,9 @@ sparse Merkle map, and anchors the hour in Bitcoin. When a lab stays silent abou
 training data, the silence becomes a **proof anyone can verify offline**.
 
 > Crovia states observation facts, bounded by two public clocks. It never asserts intent.
+
+**Verify a proof in your browser** — nothing to install:
+[croviatrust.com/registry/seal/verify/?url=…](https://croviatrust.com/registry/seal/verify/?url=https%3A%2F%2Fcroviatrust.com%2Fregistry%2Fdata%2Ftacet%2Fproofs%2Fmistralai__Mistral-7B-v0.1.seal.json)
 
 ```bash
 pip install -e countersign/tacet/reference/python -e crovia-seal/reference/python -e countersign/tacet/operator
