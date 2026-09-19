@@ -1,34 +1,55 @@
-# Crovia Trust
+<p align="center"><img src="https://croviatrust.com/logo.png" width="64" alt=""></p>
 
-Independent cryptographic accountability infrastructure for the AI era.
+<h2 align="center">Crovia — silence you can verify</h2>
 
-## We do not contact third-party repositories.
+<p align="center">
+  <a href="https://croviatrust.com/registry/tacet/">Live log</a> ·
+  <a href="https://github.com/croviatrust/countersign/blob/main/tacet/SPEC.md">TACET spec</a> ·
+  <a href="https://croviatrust.com/whitepaper.html">Whitepaper</a> ·
+  <a href="https://croviatrust.com/llms.txt">For LLMs</a> ·
+  <a href="https://github.com/croviatrust/countersign/blob/main/CANON.md">Canon</a>
+</p>
 
-After running an automated outreach experiment in early 2026, we have
-**permanently disabled** all outbound issue/PR/comment activity on
-repositories outside the `croviatrust/*` organization. We apologize for
-any inconvenience this caused to maintainers who received unsolicited
-issues from us. **No further outreach will occur.**
+Every hour, a public randomness beacon opens an epoch. **TACET** fetches the model
+cards of the AI systems under watch, runs a published predicate over the bytes —
+*does this card name its training data?* — signs each answer, commits them all to a
+sparse Merkle map, and anchors the hour in Bitcoin. When a lab stays silent about
+training data, the silence becomes a **proof anyone can verify offline**.
 
-If you received an automated issue from this account in 2026 and would
-like to discuss it directly, please contact: **info@croviatrust.com**.
+> Crovia states observation facts, bounded by two public clocks. It never asserts intent.
 
-## What we publish
+```bash
+pip install -e countersign/tacet/reference/python -e crovia-seal/reference/python -e countersign/tacet/operator
+curl -sO https://croviatrust.com/registry/data/tacet/proofs/mistralai__Mistral-7B-v0.1.seal.json
+tacet-operator verify mistralai__Mistral-7B-v0.1.seal.json      # recomputes roots, drand, Bitcoin anchors, signatures
+```
 
-- **Crovia Seal** — invisible cryptographic seals for AI outputs.
-  [croviatrust.com/seal/](https://croviatrust.com/seal/) ·
-  [Browser extension](https://croviatrust.com/seal/) ·
-  [Mobile PWA](https://croviatrust.com/app/) ·
-  [Public ledger](https://croviatrust.com/wall/)
-- **IETF draft-crovia-seal** — protocol specification.
-- **Whitepaper** — [croviatrust.com/whitepaper.html](https://croviatrust.com/whitepaper.html)
-- **Hugging Face datasets** — [@CroviaResearch](https://huggingface.co/CroviaResearch)
+### Repositories
 
-## Open source
+| | |
+|---|---|
+| **[countersign](https://github.com/croviatrust/countersign)** | **TACET**: specification, reference implementation, conformance vectors, the live operator, the canon and the site sources. Start here. |
+| **[crovia-seal](https://github.com/croviatrust/crovia-seal)** | The **Crovia Seal** (`crovia.seal.v1`): tamper-evident, offline-verifiable receipts for AI outputs. IETF Internet-Draft. Every TACET proof is a Seal. |
+| [crovia-core-engine](https://github.com/croviatrust/crovia-core-engine) | The 2026 archive substrate (collectors, signed envelopes, batch seals, anchors). Observation paused 2026-06-01; data stays public. |
+| [crovia-evidence-lab](https://github.com/croviatrust/crovia-evidence-lab) | Public data exports of the archive, CC-BY-4.0. |
+| [causari](https://github.com/croviatrust/causari) | Sibling product: causal provenance of what AI **agents** do to a codebase. Same Seal, different subject. |
 
-All Crovia code is Apache 2.0 / CC0. Audit, fork, build on it.
+### Crovia is not Causari
+
+| | **Crovia** | **Causari** |
+|---|---|---|
+| Watches | what AI **providers disclose** about **training data** | what AI **agents do** to **your codebase** |
+| For | regulators, litigators, journalists, the public | software developers |
+| Output | TACET silence proofs, LACUNA certificates | causal provenance of code edits |
+| Home | [croviatrust.com](https://croviatrust.com) | [causari.dev](https://causari.dev) |
+
+### Conduct
+
+This account does not open issues, pull requests or discussions on repositories outside
+`croviatrust/*`. An automated outreach experiment in early 2026 was stopped and will not
+resume. If you received an unsolicited issue from us, we apologise — write to
+info@croviatrust.com.
 
 ---
 
-*Crovia is operated as an independent research initiative. We have no
-affiliation with any AI vendor and accept no funding from any AI vendor.*
+Independent · no vendor money · code Apache-2.0 · specs CC0 · data CC-BY-4.0 · info@croviatrust.com

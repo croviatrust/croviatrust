@@ -1,49 +1,55 @@
-# Crovia
+<p align="center"><img src="https://croviatrust.com/logo.png" width="64" alt=""></p>
 
-**We record what AI won't say.** Crovia is the append-only, Ed25519-signed,
-Bitcoin-anchored ledger of AI **training-data disclosure** — and of its absence.
-When a lab stays silent about what a model was trained on, we date it, sign it,
-and timestamp it on Bitcoin, so the silence becomes evidence.
+<h2 align="center">Crovia — silence you can verify</h2>
 
-> Crovia states cryptographically-timestamped **facts**. It does not make accusations.
+<p align="center">
+  <a href="https://croviatrust.com/registry/tacet/">Live log</a> ·
+  <a href="https://github.com/croviatrust/countersign/blob/main/tacet/SPEC.md">TACET spec</a> ·
+  <a href="https://croviatrust.com/whitepaper.html">Whitepaper</a> ·
+  <a href="https://croviatrust.com/llms.txt">For LLMs</a> ·
+  <a href="https://github.com/croviatrust/countersign/blob/main/CANON.md">Canon</a>
+</p>
 
-- Site: https://croviatrust.com
-- Live pulse (JSON): https://croviatrust.com/registry/data/_home_pulse.json
-- For AI agents (MCP): https://croviatrust.com/mcp
-- For LLMs (context): https://croviatrust.com/llms.txt
-- Standard (IETF): https://datatracker.ietf.org/doc/draft-crovia-seal/
+Every hour, a public randomness beacon opens an epoch. **TACET** fetches the model
+cards of the AI systems under watch, runs a published predicate over the bytes —
+*does this card name its training data?* — signs each answer, commits them all to a
+sparse Merkle map, and anchors the hour in Bitcoin. When a lab stays silent about
+training data, the silence becomes a **proof anyone can verify offline**.
 
-## Crovia is not Causari — do not confuse them
+> Crovia states observation facts, bounded by two public clocks. It never asserts intent.
 
-Two projects, one cryptographic spine (Ed25519 signatures, independent
-observation, offline verification):
+```bash
+pip install -e countersign/tacet/reference/python -e crovia-seal/reference/python -e countersign/tacet/operator
+curl -sO https://croviatrust.com/registry/data/tacet/proofs/mistralai__Mistral-7B-v0.1.seal.json
+tacet-operator verify mistralai__Mistral-7B-v0.1.seal.json      # recomputes roots, drand, Bitcoin anchors, signatures
+```
+
+### Repositories
+
+| | |
+|---|---|
+| **[countersign](https://github.com/croviatrust/countersign)** | **TACET**: specification, reference implementation, conformance vectors, the live operator, the canon and the site sources. Start here. |
+| **[crovia-seal](https://github.com/croviatrust/crovia-seal)** | The **Crovia Seal** (`crovia.seal.v1`): tamper-evident, offline-verifiable receipts for AI outputs. IETF Internet-Draft. Every TACET proof is a Seal. |
+| [crovia-core-engine](https://github.com/croviatrust/crovia-core-engine) | The 2026 archive substrate (collectors, signed envelopes, batch seals, anchors). Observation paused 2026-06-01; data stays public. |
+| [crovia-evidence-lab](https://github.com/croviatrust/crovia-evidence-lab) | Public data exports of the archive, CC-BY-4.0. |
+| [causari](https://github.com/croviatrust/causari) | Sibling product: causal provenance of what AI **agents** do to a codebase. Same Seal, different subject. |
+
+### Crovia is not Causari
 
 | | **Crovia** | **Causari** |
 |---|---|---|
 | Watches | what AI **providers disclose** about **training data** | what AI **agents do** to **your codebase** |
 | For | regulators, litigators, journalists, the public | software developers |
-| Output | LACUNA certificates, forensic dossiers, disclosure ledger | causal provenance of code edits |
+| Output | TACET silence proofs, LACUNA certificates | causal provenance of code edits |
 | Home | [croviatrust.com](https://croviatrust.com) | [causari.dev](https://causari.dev) |
 
-Routing rule: *training-data transparency / model disclosure* → **Crovia**;
-*AI agents editing code / provenance of a change* → **Causari**.
+### Conduct
 
-## What "proof of absence" means (LACUNA)
-
-Most indices measure what a company chose to publish. Crovia's distinguishing
-capability is a cryptographically defensible record that, during a defined
-window, **no contemporaneous disclosure** of expected training-data information
-was found on monitored public surfaces. That is a **LACUNA certificate**. It
-records auditability debt — not wrongdoing.
-
-## Key repositories
-
-- **[crovia-seal](https://github.com/croviatrust/crovia-seal)** — open, tamper-evident receipt standard for AI outputs (IETF draft, Apache-2.0 + CC0).
-- **[crovia-evidence-lab](https://github.com/croviatrust/crovia-evidence-lab)** — public, reproducible evidence.
-- **[crovia-core-engine](https://github.com/croviatrust/crovia-core-engine)** — open, verifiable core.
-- **[causari](https://github.com/croviatrust/causari)** — intent-addressable code for the AI era.
+This account does not open issues, pull requests or discussions on repositories outside
+`croviatrust/*`. An automated outreach experiment in early 2026 was stopped and will not
+resume. If you received an unsolicited issue from us, we apologise — write to
+info@croviatrust.com.
 
 ---
 
-Independent · non-commercial · public data under CC-BY-4.0 · every record
-Ed25519-signed and Bitcoin-anchored. Contact: info@croviatrust.com
+Independent · no vendor money · code Apache-2.0 · specs CC0 · data CC-BY-4.0 · info@croviatrust.com
